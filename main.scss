@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  ::-webkit-scrollbar {
+    width: 1em;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgba(255, 189, 10, 0.2);
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+    background-color: rgb(244, 160, 43);
+  }
+}
+
+%imgHover {
+  position: relative;
+  &:hover {
+    transform: scale(1.3);
+    z-index: 100;
+    opacity: 8;
+  }
+}
+
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+%images {
+  img {
+    max-width: 65%;
+    opacity: 0.6;
+    transition: 0.3s;
+  }
+  img:first-child {
+    @extend %imgHover;
+    height: 200px;
+    transform: rotate(0.1turn);
+    z-index: 2;
+    border: {
+      top-left-radius: 25px;
+      bottom-right-radius: 25px;
+    }
+  }
+  img:nth-of-type(2) {
+    @extend %imgHover;
+    bottom: 100px;
+    right: 40px;
+    transform: rotate(-5.1turn);
+    z-index: 1;
+  }
+  img:nth-of-type(3) {
+    @extend %imgHover;
+    height: 200px;
+    bottom: 200px;
+    left: 50px;
+    transform: rotate(30deg);
+    z-index: 0;
+  }
+  img:last-child {
+    @extend %imgHover;
+    bottom: 200px;
+    left: -70px;
+    height: 200px;
+    transform: rotate(0.1turn);
+    z-index: 2;
+    border: {
+      top-left-radius: 25px;
+      bottom-right-radius: 25px;
+    }
+  }
+}
+
+.page {
+  background-image: url(https://img.welt.de/img/regionales/bayern/mobile201781784/4892509717-ci102l-w1024/urn-newsml-dpa-com-20090101-191012-99-268119-large-4-3-jpg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  h1 {
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+  }
+  main {
+    display: grid;
+    grid-template-columns: 500px 1fr 500px;
+    gap: 15px;
+    height: 90%;
+    .left {
+      @include flex;
+      max-height: 50%;
+      @extend %images;
+    }
+    section {
+      display: flex;
+    //   gap: 10px;
+      height: calc(100vh - 77px);
+      box-shadow: 0px 0px 10px rgb(255, 255, 255);
+      padding: 10px 0;
+      position: relative;
+      overflow: auto;
+      .image {
+        width: 150px;
+        img {
+          max-width: 100px;
+          height: calc(100vh - 77px);
+          position: fixed;
+          left: 30%;
+          bottom: 0;
+          opacity: .8;
+        }
+      }
+      article {
+        line-height: 1.6;
+        font-weight: 600;
+        pre {
+          color: white;
+          background: rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 10px rgb(255, 255, 255);
+          padding: 30px 10px 10px;
+          q {
+            font-size: 20px;
+            font-style: italic;
+          }
+        }
+        .anführung {
+          font-weight: 900;
+        }
+      }
+    }
+    .right {
+      @include flex;
+      @extend %images;
+      height: 50%;
+    }
+  }
+}
